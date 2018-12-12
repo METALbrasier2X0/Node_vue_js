@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Introduction à Vue.js</title>
+</head>
+<body>
+    <div id="app">
+        <span v-bind:title="message">{{ message }}</span>
+
+        
+        <ul>
+            <li v-for="(movie,index) in movies" v-bind:key="movie.title">
+                {{ movie.title }} <button v-on:click="delete_movie(index)">X</button>  <button v-on:click="edit_movie(index)">edit</button> <input type="text" v-if ="movie.display" v-model="movietoedit.title">  </input>
+            </li>
+        </ul>
+
+
+<p v-if="display">On me voit</p>
+<p v-else>On me voit plus</p>
+
+<input type="text" v-model="message" />
+{{message_formulaire}}
+<button v-on:click="clickMethod">Submit form</button>
+
+
+
+{{ counter }} <button v-on:click="increment(4)">Increment</button>
+
+
+<br />
+    {{ message }}<br />
+    {{ message_reversed }} 
+
+
+    </div>
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                message: "Hello World!",
+                message_formulaire:"cyka",
+                movies:[{title:"fight'n rage", display:false},{title:"street of rage 2", display:false}],
+                display:false,
+                counter:0,
+                movietoedit:{title:""}
+                
+            },
+            methods: {
+                clickMethod(){alert("blyat")},
+                increment(step) {
+                    this.counter+=step },
+                delete_movie(index){
+                    this.movies.splice(index, 1)
+                },
+                edit_movie(index){
+                    this.movietoedit = this.movies[index]
+                    this.movies[index].display=true
+                    console.log(this.movietoedit.title)   
+                    console.log(index)  
+                }
+    },
+            computed: {
+                message_reversed() {
+                    return this.message.split('').reverse().join('')
+        }
+    }
+        })
+
+vm.message = "Hello METAL"
+
+
+
+
+
+
+    </script>
+
+
+
+
+</script>
+</body>
+</html>
